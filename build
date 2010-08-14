@@ -1,0 +1,4 @@
+#!/bin/bash
+tar cvjf mounty-0.0.2.tar.bz2 mounty-0.0.2/
+makepkg -f --skipinteg
+sudo pacman -U mounty-0.0.2-1-any.pkg.tar.gz

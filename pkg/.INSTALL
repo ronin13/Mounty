@@ -1,0 +1,5 @@
+
+post_install(){
+     echo "Remember to restart hal after installation"
+	 echo "Read the README under /usr/share/doc/mounty"
+}

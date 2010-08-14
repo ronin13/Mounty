@@ -1,0 +1,41 @@
+Mounty:  Mount your drives without any shackles/permissions. It doesnt depend on any window manager, desktop manager, hal, dbus(optional), consolekit or policykit.
+
+Currently,  since hal wont bother with the drives, removable drives may not be visible in Thunar shortcuts(or any file manager shortcut.Tested with thunar). However, one can bookmark drives and they will be visible in the left pane.
+
+To run:
+
+sudo /etc/rc.d/mounty start
+
+To stop:
+
+sudo /etc/rc.d/mounty stop
+
+To change config,
+cp /etc/mounty.tab.example /etc/mounty.tab and modify /etc/mounty.tab 
+
+In case you are running through rc.conf disable libnotify notifications by adding
+
+%notify=0   to /etc/mounty.tab
+
+To change the UID under which non-root operations will be done 
+
+%uid=<number>
+
+Not everything is performed as root. In some cases, root priv are dropped
+
+One can also use pmount by giving
+
+%method=pmount
+
+Mount point can be changed by giving (default: /media)
+
+%mount_point="/mnt/"    
+  -- in this case mount point is /mnt
+
+To unmount the drives: use umount - :).
+
+By default: log will be written to /tmp/.
+
+
+================================================================
+If anything breaks/burns, I am not responsible...........:)
