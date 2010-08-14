@@ -1,0 +1,42 @@
+#!/bin/bash
+
+. /etc/rc.conf
+. /etc/rc.d/functions
+PID=`cat /var/run/mounty.pid`
+case "$1" in
+  start)
+    stat_busy "Starting mounty"
+    /usr/bin/mounty &
+    if [ $? -gt 0 ]; then
+      stat_fail
+    else
+      add_daemon mounty
+      stat_done
+    fi
+    ;;
+  stop)
+    stat_busy "Stopping mounty"
+	kill $PID
+    if [ $? -gt 0 ]; then
+      stat_fail
+    else
+      rm_daemon mounty
+      rm /var/run/mounty.pid
+      stat_done
+    fi
+    ;;
+  restart)
+    $0 stop
+    sleep 2
+    $0 start
+    ;;
+  reload)
+     kill -SIGUSR1 $PID
+	 ;;
+  unmount)
+     kill -SIGUSR2 $PID
+	 ;;
+  *)
+    echo "usage: $0 {start|stop|restart}"
+esac
+exit 0

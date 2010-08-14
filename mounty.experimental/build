@@ -1,0 +1,5 @@
+#!/bin/bash
+VERSION=0.0.2
+	tar cvjf mounty-$VERSION.tar.bz2 mounty-$VERSION/
+	makepkg -f --skipinteg
+	sudo pacman -U mounty-$VERSION-1-any.pkg.tar.gz
